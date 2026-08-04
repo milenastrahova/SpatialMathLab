@@ -1,0 +1,21 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "Spatial Math Core",
+  "Description": "Reusable C++ spatial mathematics, geometry, targeting and debug visualization toolkit.",
+  "Category": "Math",
+  "CreatedBy": "Milena Strahova",
+  "CreatedByURL": "https://github.com/milenastrahova",
+  "EnabledByDefault": true,
+  "CanContainContent": false,
+  "IsBetaVersion": true,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "SpatialMathCore",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ]
+}

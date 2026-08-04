@@ -1,0 +1,19 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "Portfolio",
+  "Description": "Interactive Unreal Engine C++ spatial mathematics laboratory.",
+  "Modules": [
+    {
+      "Name": "SpatialMathLab",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "SpatialMathCore",
+      "Enabled": true
+    }
+  ]
+}
