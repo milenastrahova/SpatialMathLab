@@ -1,57 +1,178 @@
 # SpatialMathLab
 
-**Unreal Engine 5.8 C++ spatial mathematics toolkit and interactive laboratory.**
+<p align="center">
+  <strong>Unreal Engine 5.8 C++ Spatial Mathematics Toolkit</strong><br>
+  Reusable Runtime plugin, five interactive demonstrations and 25 verified automation tests.
+</p>
 
-SpatialMathLab demonstrates applied linear algebra, computational geometry, transforms, quaternions, targeting math and analytical ballistics through a reusable Runtime plugin, an interactive five-station laboratory and verified Unreal Automation Framework tests.
+<p align="center">
+  <img src="media/spatialmathlab-overview.png" alt="SpatialMathLab overview" width="100%">
+</p>
 
-![SpatialMathLab overview](media/spatialmathlab-overview.png)
+## Overview
 
-## Engineering Highlights
+SpatialMathLab demonstrates applied 3D mathematics through a reusable Unreal Engine Runtime plugin and an interactive laboratory.
 
-- reusable `SpatialMathCore` Runtime plugin;
-- Blueprint-callable C++ API;
-- vector projection, rejection and reflection;
-- signed angles and field-of-view cone classification;
-- closest-point and point-to-segment distance calculations;
+The project translates linear algebra and computational geometry into practical gameplay and engine-facing systems:
+
+- vector decomposition and reflection;
+- signed angles and field-of-view classification;
+- closest-point calculations;
 - ray-plane, ray-sphere and ray-AABB intersections;
-- barycentric coordinates and point-in-triangle classification;
-- local/world transform conversion and transform round trips;
+- barycentric coordinates;
+- local/world transform conversion;
 - shortest-arc quaternion rotation and normalized SLERP;
-- analytical low/high ballistic trajectory solutions;
-- free-fly C++ camera with station presets;
-- 25 C++ automation tests covering normal and degenerate cases.
+- target scoring;
+- analytical low/high ballistic trajectories.
 
-## Interactive Stations
+## Verified Engineering Evidence
 
-### 1. Vector Projection
+| Area | Evidence |
+|---|---|
+| Engine | Unreal Engine 5.8 |
+| Language | C++ |
+| Architecture | Reusable `SpatialMathCore` Runtime plugin |
+| Integration | Blueprint-callable public API |
+| Visual validation | Five interactive debug stations |
+| Automated validation | 25/25 tests passed |
+| Edge cases | Degenerate vectors, misses, parallel rays and unreachable targets |
+| Build | Clean Editor build with `BuildSettingsVersion.V7` |
+| Release | [`v1.0.0`](https://github.com/milenastrahova/SpatialMathLab/releases/tag/v1.0.0) |
+
+## Interactive Laboratory
+
+### 01 â€” Vector Projection
 
 Decomposes an animated input vector into projection and rejection components relative to a basis vector.
 
-![Vector projection](media/vector-projection.png)
+Practical uses include slope movement, steering, surface alignment and directional filtering.
 
-### 2. Quaternion SLERP
+<p align="center">
+  <img src="media/vector-projection.png" alt="Vector projection demonstration" width="88%">
+</p>
+
+### 02 â€” Quaternion SLERP
 
 Visualizes shortest-arc rotation and normalized spherical interpolation between two directions.
 
-![Quaternion SLERP](media/quaternion-slerp.png)
+Practical uses include camera rotation, lock-on transitions, aiming and orientation blending.
 
-### 3. Ray Intersections
+<p align="center">
+  <img src="media/quaternion-slerp.png" alt="Quaternion SLERP demonstration" width="88%">
+</p>
 
-Visualizes a ray-sphere hit, hit distance, contact point, surface normal and a ray-AABB demonstration.
+### 03 â€” Ray Intersections
 
-![Ray intersections](media/ray-intersections.png)
+Visualizes a ray-sphere hit, contact point, hit distance, surface normal and a ray-AABB demonstration.
 
-### 4. Target Selection
+Practical uses include aiming, interaction traces, visibility checks and spatial queries.
+
+<p align="center">
+  <img src="media/ray-intersections.png" alt="Ray intersection demonstration" width="88%">
+</p>
+
+### 04 â€” Target Selection
 
 Classifies moving targets using range, field-of-view cone checks, dot-product alignment and distance weighting.
 
-![Target selection](media/target-selection.png)
+Practical uses include lock-on systems, aim assistance and contextual targeting.
 
-### 5. Ballistic Solutions
+<p align="center">
+  <img src="media/target-selection.png" alt="Target selection demonstration" width="88%">
+</p>
+
+### 05 â€” Ballistic Solutions
 
 Solves and visualizes analytical low-arc and high-arc projectile trajectories under gravity.
 
-![Ballistic solutions](media/ballistic-solutions.png)
+Practical uses include projectile weapons, AI ranged combat, trajectory previews and artillery systems.
+
+<p align="center">
+  <img src="media/ballistic-solutions.png" alt="Ballistic trajectory demonstration" width="88%">
+</p>
+
+## SpatialMathCore Plugin
+
+The reusable Runtime plugin owns the mathematical implementation and validation.
+
+### Public API
+
+`USpatialMathBlueprintLibrary` exposes stateless C++ functions to C++ and Blueprints.
+
+Main result structures:
+
+- `FSpatialRayHit`;
+- `FSpatialBarycentricResult`;
+- `FSpatialBallisticSolution`.
+
+### Design Principles
+
+- deterministic stateless calculations;
+- explicit validity results;
+- safe handling of invalid and degenerate inputs;
+- floating-point tolerance instead of exact equality;
+- separation between reusable mathematics and presentation;
+- tests focused on both successful and failure cases.
+
+## Automated Testing
+
+All 25 `SpatialMathCore` tests passed again after the final layout and camera changes.
+
+<p align="center">
+  <img src="media/automation-tests-passed.png" alt="SpatialMathCore automation tests passed" width="88%">
+</p>
+
+Test coverage includes:
+
+- projection, rejection and reflection;
+- positive and negative signed angles;
+- zero-length vectors;
+- closest points and endpoint clamping;
+- point-to-segment distance;
+- target inclusion and exclusion;
+- ray hits, misses and parallel cases;
+- barycentric inside/outside classification;
+- transform round trips;
+- shortest-arc quaternion mapping;
+- SLERP endpoints;
+- reachable and unreachable ballistic solutions.
+
+Reproduce the test run with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File ".\Tools\Run-SpatialMathCoreTests.ps1"
+```
+
+Detailed results: [docs/TESTING.md](docs/TESTING.md)
+
+## Architecture
+
+```text
+SpatialMathLab/
+|-- Plugins/
+|   `-- SpatialMathCore/
+|       `-- Source/
+|           `-- SpatialMathCore/
+|               |-- Public/
+|               `-- Private/
+|                   `-- Tests/
+|-- Source/
+|   `-- SpatialMathLab/
+|-- Content/
+|-- Config/
+|-- Tools/
+|-- docs/
+`-- media/
+```
+
+The plugin contains reusable mathematics. The host project contains the laboratory, animation, camera controls and portfolio presentation.
+
+Further documentation:
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Applied Mathematics](docs/MATHEMATICS.md)
+- [Testing](docs/TESTING.md)
+- [Portfolio Summary](docs/PORTFOLIO_SUMMARY.md)
 
 ## Camera Controls
 
@@ -68,72 +189,42 @@ Solves and visualizes analytical low-arc and high-arc projectile trajectories un
 | `Shift` | Faster movement |
 | Hold `RMB` | Free look |
 
-## Automated Verification
-
-All 25 `SpatialMathCore` tests passed after the final visual and camera changes.
-
-![Automation tests passed](media/automation-tests-passed.png)
-
-Test areas include:
-
-- numerical vector operations;
-- zero-length and degenerate inputs;
-- signed-angle orientation;
-- clamped closest points;
-- cone inclusion and exclusion;
-- ray hits, misses, parallel cases and tangency;
-- barycentric inside/outside classification;
-- transform round-trip accuracy;
-- quaternion endpoint behavior;
-- reachable and unreachable ballistic solutions.
-
-See [docs/TESTING.md](docs/TESTING.md) for reproduction instructions and verified results.
-
-## Architecture
-
-```text
-SpatialMathLab/
-â”œâ”€â”€ Plugins/
-â”‚   â””â”€â”€ SpatialMathCore/
-â”‚       â””â”€â”€ Source/
-â”‚           â””â”€â”€ SpatialMathCore/
-â”‚               â”œâ”€â”€ Public/
-â”‚               â””â”€â”€ Private/
-â”‚                   â””â”€â”€ Tests/
-â”œâ”€â”€ Source/
-â”‚   â””â”€â”€ SpatialMathLab/
-â”œâ”€â”€ Content/
-â”œâ”€â”€ Config/
-â”œâ”€â”€ Tools/
-â”œâ”€â”€ docs/
-â””â”€â”€ media/
-```
-
-The mathematical systems live in the reusable plugin. The host project is responsible for the demonstration laboratory, camera controls and presentation.
-
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and [docs/MATHEMATICS.md](docs/MATHEMATICS.md).
-
 ## Build
 
 Requirements:
 
 - Unreal Engine 5.8;
-- Visual Studio with the Game development with C++ workload;
+- Visual Studio with **Game development with C++**;
 - Windows 64-bit.
 
-Open `SpatialMathLab.uproject`. Unreal may rebuild the C++ modules automatically. The project uses `BuildSettingsVersion.V7`.
+Open `SpatialMathLab.uproject`. Unreal may rebuild the project modules automatically.
 
-## Portfolio Evidence
+## Portfolio Relevance
 
-This project was built to provide direct, reviewable evidence of applied 3D mathematics rather than relying on a generic `Linear Algebra` entry in a skills list.
+SpatialMathLab provides reviewable evidence of:
 
-**CV summary:**
+- applied linear algebra and 3D geometry;
+- Unreal Engine C++ architecture;
+- reusable plugin development;
+- Blueprint API design;
+- numerical edge-case handling;
+- automated testing;
+- debug visualization;
+- gameplay-facing targeting and projectile mathematics.
+
+### CV Summary
 
 > Developed a reusable Unreal Engine 5.8 C++ plugin for vector decomposition, signed angles, transform-space conversion, quaternion interpolation, ray intersections, target selection and analytical ballistic trajectories. Added an interactive five-station laboratory, Blueprint APIs and 25 automation tests covering numerical and degenerate edge cases.
+
+## Release
+
+Latest release:
+
+[SpatialMathLab v1.0.0](https://github.com/milenastrahova/SpatialMathLab/releases/tag/v1.0.0)
 
 ## Author
 
 **Milena Strahova**
 
-- GitHub: [github.com/milenastrahova](https://github.com/milenastrahova)
-- ArtStation: [artstation.com/milenastrahova](https://www.artstation.com/milenastrahova)
+- [GitHub](https://github.com/milenastrahova)
+- [ArtStation](https://www.artstation.com/milenastrahova)
